@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'ch5iz%gfh_$txgc33u3-wj33z^r+_1lpv#au#4=ems*z+4h_r7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
