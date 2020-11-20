@@ -25,7 +25,7 @@ SECRET_KEY = 'ch5iz%gfh_$txgc33u3-wj33z^r+_1lpv#au#4=ems*z+4h_r7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["http://awsdjango.eba-82andig8.ap-northeast-2.elasticbeanstalk.com/"]
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'storages',
     'app',
 ]
 
