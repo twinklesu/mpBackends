@@ -20,10 +20,10 @@ from rest_framework import routers
 from app import views
 
 router = routers.DefaultRouter()
-router.register(r'test', views.TestViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     url('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('test/', views.TestAPIView.as_view()),
 ]
