@@ -38,14 +38,14 @@ class LoginAPIView(APIView):
         if UserInfo.objects.filter(user_id = user_id).exists():
             try:
                 cursor = connection.cursor()
-                strSql = 'select user_pw from user_info where user_id ="%s";'%(user_id)
+                strSql = 'select * from user_info where user_id ="%s";'%(user_id)
                 result = cursor.execute(strSql)
-                user_pw = cursor.fetchall()
+                data = cursor.fetchall()
                 connection.commit()
                 connection.close()
             except:
                 connection.rollback()
-            return Response(data={'user_pw': user_pw[0][0]})
+            return Response(data=data)
         else:
-            return Response(data={'user_pw':None}) 
+            return Response(data=None)
 
