@@ -7,10 +7,24 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
+# test table
 class Test(models.Model):
     test = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'test'
+
+# user_info table
+class UserInfo(models.Model):
+    user_no = models.AutoField(primary_key=True)
+    user_id = models.CharField(max_length=128, blank=True, null=True)
+    user_pw = models.CharField(max_length=128, blank=True, null=True)
+    user_nicknm = models.CharField(max_length=45, blank=True, null=True)
+    user_town = models.CharField(max_length=128, blank=True, null=True)
+    user_tel = models.CharField(max_length=32, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'user_info'
+
