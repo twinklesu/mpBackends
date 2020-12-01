@@ -35,14 +35,17 @@ class JoinViewSet(viewsets.ModelViewSet):
 # 로그인
 class LoginAPIView(APIView):
     def get(self, request, user_id):
-        try:
-            cursor = connection.cursor()
-            strSql = 'select user_pw from user_info where user_id ="%s";'%(user_id)
-            result = cursor.execute(strSql)
-            user_pw = cursor.fetchall()
-            connection.commit()
-            connection.close()
-        except:
-            connection.rollback()
-            return Response(data={'user_pw': None})
-        return Response(data={'user_pw': user_pw[0][0]})
+        if UserInfo.objects.filter(user_id = user_id).exists():
+            try:
+                cursor = connection.cursor()
+                strSql = 'select user_pw from user_info where user_id ="%s";'%(user_id)
+                result = cursor.execute(strSql)
+                user_pw = cursor.fetchall()
+                connection.commit()
+                connection.close()
+            except:
+                connection.rollback()
+            return Response(data={'user_pw': user_pw[0][0]})
+        else:
+            return Response(data={'user_pw':None}) 
+
