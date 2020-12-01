@@ -36,16 +36,8 @@ class JoinViewSet(viewsets.ModelViewSet):
 class LoginAPIView(APIView):
     def get(self, request, user_id):
         if UserInfo.objects.filter(user_id = user_id).exists():
-            try:
-                cursor = connection.cursor()
-                strSql = 'select * from user_info where user_id ="%s";'%(user_id)
-                result = cursor.execute(strSql)
-                data = cursor.fetchall()
-                connection.commit()
-                connection.close()
-            except:
-                connection.rollback()
-            return Response(data=result)
+            serializer = UserInfoSerializer(UserInfo.objects.filter(user_id = user_id), many=False)
+            return Response(serializer.data)
         else:
             return Response(data=None)
 
