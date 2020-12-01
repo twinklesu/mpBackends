@@ -45,7 +45,7 @@ class LoginAPIView(APIView):
                 connection.close()
             except:
                 connection.rollback()
-            return Response(data=data)
+            return Response(data=result)
         else:
             return Response(data=None)
 
