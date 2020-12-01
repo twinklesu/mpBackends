@@ -36,7 +36,7 @@ class JoinViewSet(viewsets.ModelViewSet):
 class LoginAPIView(APIView):
     def get(self, request, user_id):
         if UserInfo.objects.filter(user_id = user_id).exists():
-            serializer = UserInfoSerializer(UserInfo.objects.filter(user_id = user_id), many=False)
+            serializer = UserInfoSerializer(UserInfo.objects.filter(user_id = user_id), many=True)
             return Response(serializer.data)
         else:
             return Response(data=None)
