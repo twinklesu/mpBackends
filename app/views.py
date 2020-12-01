@@ -45,4 +45,4 @@ class LoginAPIView(APIView):
         except:
             connection.rollback()
             return Response(data={'user_pw': None})
-        return Response(data={'user_pw': user_pw[0]})
+        return Response(data={'user_pw': user_pw[0][0]})
