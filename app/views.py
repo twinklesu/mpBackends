@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Test, UserInfo
-from .serializers import TestSerializer, UserInfoSerializer
+from .models import Test, UserInfo, Pet
+from .serializers import TestSerializer, UserInfoSerializer, PetSerializer
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -40,4 +40,9 @@ class LoginAPIView(APIView):
             return Response(serializer.data)
         else:
             return Response(data=None)
+
+# pet 정보 등록
+class RegPetViewSet(viewsets.ModelViewSet):
+    serializer_class = PetSerializer
+    queryset = Pet.objects.all()
 

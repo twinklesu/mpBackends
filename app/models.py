@@ -28,3 +28,17 @@ class UserInfo(models.Model):
         managed = False
         db_table = 'user_info'
 
+class Pet(models.Model):
+    id = models.AutoField(primary_key=True)
+    user_id = models.CharField(max_length=128, blank=True, null=True)
+    image = models.BinaryField(blank=True, null=True)
+    name = models.CharField(max_length=128, blank=True, null=True)
+    age = models.IntegerField(blank=True, null=True)
+    variety = models.CharField(max_length=128, blank=True, null=True)
+    reg_num = models.CharField(max_length=128, blank=True, null=True)
+    character = models.CharField(max_length=1024, blank=True, null=True)
+    
+    class Meta:
+        managed = False
+        db_table = 'pet'
+

@@ -21,6 +21,7 @@ from app import views
 
 router = routers.DefaultRouter()
 router.register(r'join', views.JoinViewSet)
+router.register(r'reg-pet', views.RegPetViewSet)
 
 
 urlpatterns = [
