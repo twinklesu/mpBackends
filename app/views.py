@@ -4,6 +4,7 @@ from .serializers import TestSerializer, UserInfoSerializer
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.db import connection
 
 class TestAPIView(APIView):
     def get(self, request):
@@ -31,6 +32,17 @@ class JoinViewSet(viewsets.ModelViewSet):
     serializer_class = UserInfoSerializer
     queryset = UserInfo.objects.all()
 
-
-
-#### url 추가~!~!~!~!
+# 로그인
+class LoginAPIView(APIView):
+    def get(self, request, user_id):
+        try:
+            cursor = connection.cursor()
+            strSql = 'select user_pw from user_info where user_id ="%s";'%(user_id)
+            result = cursor.execute(strSql)
+            user_pw = cursor.fetchall()
+            connection.commit()
+            connection.close()
+        except:
+            connection.rollback()
+            return Response(data={'user_pw': None})
+        return Response(data={'user_pw': user_pw})
