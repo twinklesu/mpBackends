@@ -7,5 +7,5 @@ from rest_framework.views import APIView
 
 class TestAPIView(APIView):
     def get(self, request):
-        serializer = TestSerializer(Test.objects.all())
+        serializer = TestSerializer(Test.objects.all(), many=True)
         return Response(serializer.data)
