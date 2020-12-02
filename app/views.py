@@ -47,6 +47,6 @@ class RegPetViewSet(viewsets.ModelViewSet):
     queryset = Pet.objects.all()
 
 # lost 글 쓰기
-class RegPetViewSet(viewsets.ModelViewSet):
+class WritePostLostViewSet(viewsets.ModelViewSet):
     serializer_class = PostLostSerializer
     queryset = PostLost.objects.all()

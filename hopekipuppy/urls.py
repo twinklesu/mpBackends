@@ -22,6 +22,7 @@ from app import views
 router = routers.DefaultRouter()
 router.register(r'join', views.JoinViewSet)
 router.register(r'reg-pet', views.RegPetViewSet)
+router.register(r'write-post-lost', views.WritePostLostViewSet)
 
 
 urlpatterns = [
@@ -32,5 +33,4 @@ urlpatterns = [
     path('validate-id/<user_id>/', views.ValidateIdAPIView.as_view()),
     path('validate-tel/<user_tel>/', views.ValidateTelAPIView.as_view()),
     path('login/<user_id>/', views.LoginAPIView.as_view()),
-    path('write-post-lost/', views.RegPetViewSet.as_view()),
 ]
