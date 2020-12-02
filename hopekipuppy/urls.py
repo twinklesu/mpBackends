@@ -35,4 +35,5 @@ urlpatterns = [
     path('login/<user_id>/', views.LoginAPIView.as_view()),
     path('get-pet/<user_id>/<name>/', views.GetPetAPIView.as_view()),
     path('get-pet-list/<user_id>/', views.GetPetListAPIView.as_view()),
+    path('get-lost-list/', views.LostListAPIView.as_view()),
 ]
