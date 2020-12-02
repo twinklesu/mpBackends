@@ -56,3 +56,9 @@ class GetPetAPIView(APIView):
     def get(self, request, user_id, name):
         serializer = PetSerializer(Pet.objects.filter(user_id=user_id, name = name), many=True)
         return Response(serializer.data)
+
+# pet_list 정보 가져오기
+class GetPetListAPIView(APIView):
+    def get(self, request, user_id):
+        serializer = PetSerializer(Pet.objects.filter(user_id=user_id), many=True)
+        return Response(serializer.data)
