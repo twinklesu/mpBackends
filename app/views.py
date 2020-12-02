@@ -50,3 +50,9 @@ class RegPetViewSet(viewsets.ModelViewSet):
 class WritePostLostViewSet(viewsets.ModelViewSet):
     serializer_class = PostLostSerializer
     queryset = PostLost.objects.all()
+
+# pet 정보 가져오기
+class GetPetAPIView(APIView):
+    def get(self, request, user_id, name):
+        serializer = PetSerializer(Pet.objects.filter(user_id=user_id, name = name), many=True)
+        return Response(serializer.data)

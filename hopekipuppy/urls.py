@@ -33,4 +33,5 @@ urlpatterns = [
     path('validate-id/<user_id>/', views.ValidateIdAPIView.as_view()),
     path('validate-tel/<user_tel>/', views.ValidateTelAPIView.as_view()),
     path('login/<user_id>/', views.LoginAPIView.as_view()),
+    path('get-pet/<user_id>/<name>/', views.GetPetAPIView.as_view()),
 ]
