@@ -66,5 +66,5 @@ class GetPetListAPIView(APIView):
 # lost 목록
 class LostListAPIView(APIView):
     def get(self, request):
-        serializer = PostLostSerializer(PostLost.objects.all().orderby("-post_id"), many=True)
+        serializer = PostLostSerializer(PostLost.objects.all().order_by("-post_id"), many=True)
         return Response(serializer.data)
