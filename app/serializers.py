@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Test, UserInfo, Pet
+from .models import Test, UserInfo, Pet, PostLost
 
 class TestSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,4 +14,9 @@ class UserInfoSerializer(serializers.ModelSerializer):
 class PetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
+        fields = "__all__"
+
+class PostLostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PostLost
         fields = "__all__"

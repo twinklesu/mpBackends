@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Test, UserInfo, Pet
-from .serializers import TestSerializer, UserInfoSerializer, PetSerializer
+from .models import Test, UserInfo, Pet, PostLost
+from .serializers import TestSerializer, UserInfoSerializer, PetSerializer, PostLostSerializer
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -46,3 +46,7 @@ class RegPetViewSet(viewsets.ModelViewSet):
     serializer_class = PetSerializer
     queryset = Pet.objects.all()
 
+# lost 글 쓰기
+class RegPetViewSet(viewsets.ModelViewSet):
+    serializer_class = PostLostSerializer
+    queryset = PostLost.objects.all()

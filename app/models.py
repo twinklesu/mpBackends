@@ -42,3 +42,19 @@ class Pet(models.Model):
         managed = False
         db_table = 'pet'
 
+class PostLost(models.Model):
+    post_id = models.AutoField(primary_key=True)
+    user_id = models.CharField(max_length=128, blank=True, null=True)
+    title = models.CharField(max_length=256, blank=True, null=True)
+    lost_loc = models.CharField(max_length=256, blank=True, null=True)
+    lost_date = models.CharField(max_length=128, blank=True, null=True)
+    name = models.CharField(max_length=128, blank=True, null=True)
+    age = models.IntegerField(blank=True, null=True)
+    reg_num = models.CharField(max_length=128, blank=True, null=True)
+    phone_num = models.CharField(max_length=32, blank=True, null=True)
+    character = models.CharField(max_length=1024, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'post_lost'
+
