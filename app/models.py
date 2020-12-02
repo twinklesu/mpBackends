@@ -31,7 +31,7 @@ class UserInfo(models.Model):
 class Pet(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.CharField(max_length=128, blank=True, null=True)
-    image = models.BinaryField(blank=True, null=True)
+    image = models.CharField(max_length=256, blank=True, null=True)
     name = models.CharField(max_length=128, blank=True, null=True)
     age = models.IntegerField(blank=True, null=True)
     variety = models.CharField(max_length=128, blank=True, null=True)
