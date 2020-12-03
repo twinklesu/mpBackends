@@ -26,7 +26,6 @@ router.register(r'write-post-lost', views.WritePostLostViewSet)
 router.register(r'write-comment-lost', views.WriteLostCommentViewSet)
 router.register(r'write-post-found', views.WritePostFoundViewSet)
 router.register(r'write-comment-found', views.WriteFoundCommentViewSet)
-router.register(r'test-function', views.TestViewSet)
 
 
 urlpatterns = [
@@ -46,4 +45,6 @@ urlpatterns = [
     path('get-found-list/', views.FoundListAPIView.as_view()),
     path('my-found-list/<user_id>/', views.MyFoundListAPIView.as_view()),
     path('get-found-comment/<post_id>/', views.FoundCommentAPIView.as_view()),
+
+    path('test-function', views.TestFunctionAPIView.as_view()),
 ]

@@ -121,6 +121,6 @@ class WriteFoundCommentViewSet(viewsets.ModelViewSet):
     serializer_class = FoundCommentSerializer
     queryset = FoundComment.objects.all()
 
-class TestViewSet(viewsets.ModelViewSet):
+class TestFunctionAPIView(APIView):
     def get(self, request):
         return Response(data={'result':test_function()})
