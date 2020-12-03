@@ -79,7 +79,7 @@ class MyLostListAPIView(APIView):
 # lost 댓글 받아오기
 class LostCommentAPIView(APIView):
     def get(self, request, post_id):
-        serializer = LostCommentSerializer(LostComment.objects.filter(post_id=post_id).order_by("-reg_time"), many=True)
+        serializer = LostCommentSerializer(LostComment.objects.filter(post_id=post_id).order_by("reg_time"), many=True)
         return Response(serializer.data)
 
 # lost 댓글 작성
@@ -94,7 +94,7 @@ class WritePostFoundViewSet(viewsets.ModelViewSet):
     queryset = PostFound.objects.all()
 
 
-# lost 목록
+# found 목록
 class FoundListAPIView(APIView):
     def get(self, request):
         serializer = PostFoundSerializer(PostFound.objects.all().order_by("-post_id"), many=True)
@@ -111,7 +111,7 @@ class MyFoundListAPIView(APIView):
 # lost 댓글 받아오기
 class FoundCommentAPIView(APIView):
     def get(self, request, post_id):
-        serializer = FoundCommentSerializer(FoundComment.objects.filter(post_id=post_id).order_by("-reg_time"), many=True)
+        serializer = FoundCommentSerializer(FoundComment.objects.filter(post_id=post_id).order_by("reg_time"), many=True)
         return Response(serializer.data)
 
 
