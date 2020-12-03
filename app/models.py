@@ -69,3 +69,26 @@ class LostComment(models.Model):
         managed = False
         db_table = 'lost_comment'
 
+
+class PostFound(models.Model):
+    post_id = models.AutoField(primary_key=True)
+    user_id = models.CharField(max_length=128, blank=True, null=True)
+    title = models.CharField(max_length=256, blank=True, null=True)
+    found_loc = models.CharField(max_length=256, blank=True, null=True)
+    found_date = models.CharField(max_length=128, blank=True, null=True)
+    detail = models.CharField(max_length=1024, blank=True, null=True)
+    image = models.CharField(max_length=256, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'post_found'
+
+class FoundComment(models.Model):
+    id = models.AutoField(primary_key=True)
+    post_id = models.IntegerField(blank=True, null=True)
+    user_id = models.CharField(max_length=128, blank=True, null=True)
+    reg_time = models.DateTimeField(auto_now_add=True)
+    comment = models.CharField(max_length=1024, blank=True, null=True)
+    class Meta:
+        managed = False
+        db_table = 'found_comment'

@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .models import Test, UserInfo, Pet, PostLost, LostComment
+from .models import Test, UserInfo, Pet, PostLost, LostComment, PostFound, FoundComment
 from .serializers import TestSerializer, UserInfoSerializer, PetSerializer, PostLostSerializer, LostCommentSerializer
+from .serializers import PostFoundSerializer, FoundCommentSerializer
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -46,11 +47,6 @@ class RegPetViewSet(viewsets.ModelViewSet):
     serializer_class = PetSerializer
     queryset = Pet.objects.all()
 
-# lost 글 쓰기
-class WritePostLostViewSet(viewsets.ModelViewSet):
-    serializer_class = PostLostSerializer
-    queryset = PostLost.objects.all()
-
 # pet 정보 가져오기
 class GetPetAPIView(APIView):
     def get(self, request, user_id, name):
@@ -62,6 +58,11 @@ class GetPetListAPIView(APIView):
     def get(self, request, user_id):
         serializer = PetSerializer(Pet.objects.filter(user_id=user_id), many=True)
         return Response(serializer.data)
+
+# lost 글 쓰기
+class WritePostLostViewSet(viewsets.ModelViewSet):
+    serializer_class = PostLostSerializer
+    queryset = PostLost.objects.all()
 
 # lost 목록
 class LostListAPIView(APIView):
@@ -85,3 +86,36 @@ class LostCommentAPIView(APIView):
 class WriteLostCommentViewSet(viewsets.ModelViewSet):
     serializer_class = LostCommentSerializer
     queryset = LostComment.objects.all()
+
+# found
+# found 글 쓰기
+class WritePostFoundViewSet(viewsets.ModelViewSet):
+    serializer_class = PostFoundSerializer
+    queryset = PostFound.objects.all()
+
+
+# lost 목록
+class FoundListAPIView(APIView):
+    def get(self, request):
+        serializer = PostFoundSerializer(PostFound.objects.all().order_by("-post_id"), many=True)
+        return Response(serializer.data)
+
+
+# my lost 목록
+class MyFoundListAPIView(APIView):
+    def get(self, request, user_id):
+        serializer = PostFoundSerializer(PostFound.objects.filter(user_id=user_id).order_by("-post_id"), many=True)
+        return Response(serializer.data)
+
+
+# lost 댓글 받아오기
+class FoundCommentAPIView(APIView):
+    def get(self, request, post_id):
+        serializer = FoundCommentSerializer(FoundComment.objects.filter(post_id=post_id).order_by("-reg_time"), many=True)
+        return Response(serializer.data)
+
+
+# lost 댓글 작성
+class WriteFoundCommentViewSet(viewsets.ModelViewSet):
+    serializer_class = FoundCommentSerializer
+    queryset = FoundComment.objects.all()

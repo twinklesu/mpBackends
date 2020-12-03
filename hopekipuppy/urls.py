@@ -24,6 +24,8 @@ router.register(r'join', views.JoinViewSet)
 router.register(r'reg-pet', views.RegPetViewSet)
 router.register(r'write-post-lost', views.WritePostLostViewSet)
 router.register(r'write-comment-lost', views.WriteLostCommentViewSet)
+router.register(r'write-post-found', views.WritePostFoundViewSet)
+router.register(r'write-comment-found', views.WriteFoundCommentViewSet)
 
 
 urlpatterns = [
@@ -39,4 +41,8 @@ urlpatterns = [
     path('get-lost-list/', views.LostListAPIView.as_view()),
     path('my-lost-list/<user_id>/', views.MyLostListAPIView.as_view()),
     path('get-lost-comment/<post_id>/', views.LostCommentAPIView.as_view()),
+
+    path('get-found-list/', views.FoundListAPIView.as_view()),
+    path('my-found-list/<user_id>/', views.MyFoundListAPIView.as_view()),
+    path('get-found-comment/<post_id>/', views.FoundCommentAPIView.as_view()),
 ]
