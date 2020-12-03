@@ -68,3 +68,9 @@ class LostListAPIView(APIView):
     def get(self, request):
         serializer = PostLostSerializer(PostLost.objects.all().order_by("-post_id"), many=True)
         return Response(serializer.data)
+
+# my lost 목록
+class MyLostListAPIView(APIView):
+    def get(self, request, user_id):
+        serializer = PostLostSerializer(PostLost.objects.filter(user_id=user_id).order_by("-post_id"), many=True)
+        return Response(serializer.data)
