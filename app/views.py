@@ -6,6 +6,7 @@ from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.db import connection
+from .test_file import test_function
 
 class TestAPIView(APIView):
     def get(self, request):
@@ -119,3 +120,7 @@ class FoundCommentAPIView(APIView):
 class WriteFoundCommentViewSet(viewsets.ModelViewSet):
     serializer_class = FoundCommentSerializer
     queryset = FoundComment.objects.all()
+
+class TestViewSet(viewsets.ModelViewSet):
+    def get(self, request):
+        return Response(data={'result':test_function()})
