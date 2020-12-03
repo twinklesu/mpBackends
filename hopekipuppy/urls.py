@@ -23,6 +23,7 @@ router = routers.DefaultRouter()
 router.register(r'join', views.JoinViewSet)
 router.register(r'reg-pet', views.RegPetViewSet)
 router.register(r'write-post-lost', views.WritePostLostViewSet)
+router.register(r'write-post-lost', views.WriteLostCommentViewSet)
 
 
 urlpatterns = [
@@ -37,4 +38,5 @@ urlpatterns = [
     path('get-pet-list/<user_id>/', views.GetPetListAPIView.as_view()),
     path('get-lost-list/', views.LostListAPIView.as_view()),
     path('my-lost-list/<user_id>/', views.MyLostListAPIView.as_view()),
+    path('get-lost-comment/<post_id>/', views.LostCommentAPIView.as_view()),
 ]

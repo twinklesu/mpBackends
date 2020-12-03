@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Test, UserInfo, Pet, PostLost
-from .serializers import TestSerializer, UserInfoSerializer, PetSerializer, PostLostSerializer
+from .models import Test, UserInfo, Pet, PostLost, LostComment
+from .serializers import TestSerializer, UserInfoSerializer, PetSerializer, PostLostSerializer, LostCommentSerializer
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -74,3 +74,14 @@ class MyLostListAPIView(APIView):
     def get(self, request, user_id):
         serializer = PostLostSerializer(PostLost.objects.filter(user_id=user_id).order_by("-post_id"), many=True)
         return Response(serializer.data)
+
+# lost 댓글 받아오기
+class LostCommentAPIView(APIView):
+    def get(self, request, post_id):
+        serializer = LostCommentSerializer(LostComment.objects.filter(post_id=post_id).order_by("-reg_time"), many=True)
+        return Response(serializer.data)
+
+# lost 댓글 작성
+class WriteLostCommentViewSet(viewsets.ModelViewSet):
+    serializer_class = LostCommentSerializer
+    queryset = LostComment.objects.all()

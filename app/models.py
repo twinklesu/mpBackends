@@ -59,3 +59,13 @@ class PostLost(models.Model):
         managed = False
         db_table = 'post_lost'
 
+class LostComment(models.Model):
+    id = models.AutoField(primary_key=True)
+    post_id = models.IntegerField(blank=True, null=True)
+    user_id = models.CharField(max_length=128, blank=True, null=True)
+    reg_time = models.DateTimeField(auto_now_add=True)
+    comment = models.CharField(max_length=1024, blank=True, null=True)
+    class Meta:
+        managed = False
+        db_table = 'lost_comment'
+
