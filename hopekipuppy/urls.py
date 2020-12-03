@@ -23,7 +23,7 @@ router = routers.DefaultRouter()
 router.register(r'join', views.JoinViewSet)
 router.register(r'reg-pet', views.RegPetViewSet)
 router.register(r'write-post-lost', views.WritePostLostViewSet)
-router.register(r'write-post-lost', views.WriteLostCommentViewSet)
+router.register(r'write-comment-lost', views.WriteLostCommentViewSet)
 
 
 urlpatterns = [
