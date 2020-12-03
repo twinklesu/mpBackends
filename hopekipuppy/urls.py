@@ -46,5 +46,5 @@ urlpatterns = [
     path('my-found-list/<user_id>/', views.MyFoundListAPIView.as_view()),
     path('get-found-comment/<post_id>/', views.FoundCommentAPIView.as_view()),
 
-    path('test-function', views.TestFunctionAPIView.as_view()),
+    path('test-function/', views.TestFunctionAPIView.as_view()),
 ]
