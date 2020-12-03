@@ -1,2 +1,2 @@
-def test_function():
-    return "test_success"
+def test_function(image_list):
+    return image_list

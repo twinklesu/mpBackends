@@ -123,4 +123,13 @@ class WriteFoundCommentViewSet(viewsets.ModelViewSet):
 
 class TestFunctionAPIView(APIView):
     def get(self, request):
-        return Response(data={'result':test_function()})
+        try:
+            cursor = connection.cursor()
+            strSql = "select image from post_lost;"
+            result = cursor.execute(strSql)
+            image_list = cursor.fetchall()
+            connection.commit()
+            connection.close()
+        except:
+            connection.rollback()
+        return Response(data={'result':test_function(image_list)})
