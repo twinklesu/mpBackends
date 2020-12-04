@@ -23,6 +23,7 @@ class UserInfo(models.Model):
     user_nicknm = models.CharField(max_length=45, blank=True, null=True)
     user_town = models.CharField(max_length=128, blank=True, null=True)
     user_tel = models.CharField(max_length=32, blank=True, null=True)
+    token = models.CharField(max_length=256, blank=True, null=True)
 
     class Meta:
         managed = False
