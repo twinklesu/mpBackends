@@ -55,6 +55,8 @@ class PostLost(models.Model):
     phone_num = models.CharField(max_length=32, blank=True, null=True)
     character = models.CharField(max_length=1024, blank=True, null=True)
     image = models.CharField(max_length=256, blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -79,6 +81,8 @@ class PostFound(models.Model):
     found_date = models.CharField(max_length=128, blank=True, null=True)
     detail = models.CharField(max_length=1024, blank=True, null=True)
     image = models.CharField(max_length=256, blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
