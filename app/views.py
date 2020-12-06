@@ -141,4 +141,4 @@ class TestFunctionAPIView(APIView):
             connection.close()
         except:
             connection.rollback()
-        return Response(data={'result':image_list})
+        return Response(data={'result':pet_image})
