@@ -122,14 +122,23 @@ class WriteFoundCommentViewSet(viewsets.ModelViewSet):
     queryset = FoundComment.objects.all()
 
 class TestFunctionAPIView(APIView):
-    def get(self, request):
+    def get(self, request, user_id):
         try:
             cursor = connection.cursor()
-            strSql = "select image from post_lost;"
+            strSql = "select image from post_found where user_id = '%s' order by post_id desc limit 1;" %user_id
             result = cursor.execute(strSql)
             image_list = cursor.fetchall()
             connection.commit()
             connection.close()
         except:
             connection.rollback()
-        return Response(data={'result':compare_my_pet(image_list)})
+        try:
+            cursor = connection.cursor()
+            strSql = "select image, user_id, `name` from pet;"
+            result = cursor.execute(strSql)
+            pet_image = cursor.fetchall()
+            connection.commit()
+            connection.close()
+        except:
+            connection.rollback()
+        return Response(data={'result':image_list})
