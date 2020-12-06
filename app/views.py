@@ -125,7 +125,7 @@ class TestFunctionAPIView(APIView):
     def get(self, request, user_id):
         try:
             cursor = connection.cursor()
-            strSql = "select image from post_found where user_id = '%s' order by post_id desc limit 1;" %user_id
+            strSql = "select post_id, image from post_found where user_id = '%s' order by post_id desc limit 1;" %user_id
             result = cursor.execute(strSql)
             image_list = cursor.fetchall()
             connection.commit()
@@ -141,4 +141,4 @@ class TestFunctionAPIView(APIView):
             connection.close()
         except:
             connection.rollback()
-        return Response(data={'result':pet_image})
+        return Response(compare_my_pet({'result':image_list}, {'result':pet_image}))

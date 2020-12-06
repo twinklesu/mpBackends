@@ -35,7 +35,7 @@ def compare_my_pet(Found_url, Mypet_url):
 
         # Step 2) Extract image features of the target image.
 
-        target_image = decode_and_resize(target_img_path)
+        target_image = decode_and_resize(target_image_path)
         target_image = tf.image.convert_image_dtype(target_image, dtype=tf.float32)
         target_image = tf.expand_dims(target_image, 0)
         target_image = to_img_feature(target_image)
@@ -49,35 +49,45 @@ def compare_my_pet(Found_url, Mypet_url):
             input_image = to_img_feature(input_image)
             input_images.append(input_image)
 
-        similarities = []
+        similarities_1 = []
         for input_image in input_images:
             # Step 4) Compare cosine_similarities of the target image and the input images.
             dot = tf.tensordot(target_image, tf.transpose(input_image), 1)
             similarity = dot / (tf.norm(target_image, axis=1) * tf.norm(input_image, axis=1))
             similarity = tf.reshape(similarity, [-1])
-            similarities.append(similarity)
+            similarities_1.append(similarity)
 
-        return similarities
+        return similarities_1
 
-    def get_image(target_url, input_url):
-        r = requests.get(target_url)
-        data = r.json()
-        target_image_url = data['result'][0]
-        res = request.urlopen(target_image_url[0]).read()
+    def get_image(data2, data1):
+
+        target_post_id = data2['result'][0][0]
+        target_image_url = data2['result'][0][1]
+        res = request.urlopen(target_image_url).read()
         target_img = Image.open(BytesIO(res))
 
         input_image_list = []
-        r = requests.get(input_url)
-        data = r.json()
-        for u in data['result']:
+        user_list = []
+        user_list.append(target_post_id)
+
+        # user_list.appennd(target_post_id)
+        # r = requests.get(input_url)
+        # data = r.json()
+        for u in data1['result']:
+            temp = []
+            user_id = u[1]
+            pet_name = u[2]
             res = request.urlopen(u[0]).read()
             img = Image.open(BytesIO(res))
+            temp.append(user_id)
+            temp.append(pet_name)
+            user_list.append(temp)
             input_image_list.append(img)
 
-        return target_img, input_image_list
+        return target_img, input_image_list, user_list
 
     # url 2개 집어넣기
-    target_img_path, input_img_paths = get_image(Found_url, Mypet_url)
+    target_img_path, input_img_paths, user_list = get_image(Found_url, Mypet_url)
 
     hub_module_url = "https://tfhub.dev/google/imagenet/mobilenet_v2_100_96/feature_vector/1"
     with tf.Graph().as_default():
@@ -87,7 +97,33 @@ def compare_my_pet(Found_url, Mypet_url):
             sess.run(tf.global_variables_initializer())
             # Inference similarities
             similarities = []
+
             for i in similarity:
                 similarities.append(sess.run(i))
 
-    return similarities
+    for i in range(len(similarities)):
+        user_list[i + 1].append(similarities[i])
+
+    final = []
+    for i in range(len(user_list)):
+        if i == 0:
+            final.append("post id : ")
+            final.append(user_list[i])
+
+            final.append(" similarity")
+            final.append("\n")
+
+        else:
+            final.append("owner is ")
+            final.append(user_list[i][0])
+            final.append(". pet name is ")
+            final.append(user_list[i][1])
+            final.append(" similarity = ")
+            final.append(str(float(user_list[i][2])))
+            final.append("\n")
+
+    final_result = ','.join(final)
+    c = final_result.replace(',', '')
+    c = c.replace(' \n', '\n')
+
+    return c
