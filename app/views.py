@@ -6,7 +6,7 @@ from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.db import connection
-from .test_file import test_function
+from .test_file import compare_my_pet
 
 class TestAPIView(APIView):
     def get(self, request):
@@ -132,4 +132,4 @@ class TestFunctionAPIView(APIView):
             connection.close()
         except:
             connection.rollback()
-        return Response(data={'result':test_function(image_list)})
+        return Response(data={'result':compare_my_pet(image_list)})
